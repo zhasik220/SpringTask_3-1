@@ -9,44 +9,40 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
-public class HomeController{
+public class HomeController {
 
     @Autowired
     private StudentRepository studentRepository;
 
     @GetMapping(value = "/")
-    public String index(Model model){
-        model.addAttribute("students",studentRepository.findAll());
+    public String index(Model model) {
+        model.addAttribute("students", studentRepository.findAll());
         return "home";
     }
 
-   @GetMapping(value = "/add_student")
-    public String AddStudentPage(){
+    @GetMapping(value = "/add_student")
+    public String AddStudentPage() {
         return "add_student";
-   }
+    }
 
-   @PostMapping(value = "add_student")
-    public String addStudent(Student student){
+    @PostMapping(value = "add_student")
+    public String addStudent(Student student) {
         student.setMark(markLetter(student.getExam()));
         studentRepository.save(student);
         return "redirect:/";
-   }
+    }
 
-   private String markLetter(int score){
-        if (score>=90){
+    private String markLetter(int score) {
+        if (score >= 90) {
             return "A";
-        }
-        else if (score>=75 && score<=89){
+        } else if (score >= 75 && score <= 89) {
             return "B";
-        }
-        else if (score>=60 && score<=74){
+        } else if (score >= 60 && score <= 74) {
             return "C";
-        }
-        else if (score>=50 && score<=59){
+        } else if (score >= 50 && score <= 59) {
             return "D";
-        }
-        else {
+        } else {
             return "F";
         }
-   }
+    }
 }

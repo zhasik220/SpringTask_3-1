@@ -16,7 +16,7 @@ public class Student {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "name",length = 255)
+    @Column(name = "name", length = 255)
     private String name;
 
     @Column(name = "surname")
